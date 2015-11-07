@@ -19,8 +19,9 @@
     "url": "https://github.com/rtorr/welp.git"
   },
   "keywords": [
-    "redux",
-    "portal"
+    "immutable",
+    "flux",
+    "react"
   ],
   "author": "Richard Torruellas <rtorruellas@gmail.com> (http://github.com/rtorr)",
   "license": "MIT",
