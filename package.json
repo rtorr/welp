@@ -1,0 +1,74 @@
+{
+  "name": "welp",
+  "version": "0.0.0",
+  "description": "A small base component and base store for immutable flux",
+  "main": "lib/index.js",
+  "jsnext:main": "src/index.js",
+  "scripts": {
+    "start": "NODE_ENV=DEV node ./webpack.demo.server.js",
+    "clean": "rimraf lib dist coverage",
+    "build:lib": "babel src --out-dir lib",
+    "build:umd": "webpack src/index.js dist/welp.js --config webpack.config.development.js",
+    "build:umd:min": "webpack src/index.js dist/welp.min.js --config webpack.config.production.js",
+    "build:examples": "babel-node examples/buildAll.js",
+    "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
+    "preversion": "npm run clean && npm run check",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags && npm run clean",
+    "prepublish": "npm run clean && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rtorr/welp.git"
+  },
+  "keywords": [
+    "redux",
+    "portal"
+  ],
+  "author": "Richard Torruellas <rtorruellas@gmail.com> (http://github.com/rtorr)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rtorr/welp/issues"
+  },
+  "homepage": "",
+  "devDependencies": {
+    "babel": "^5.5.8",
+    "babel-core": "^5.8.22",
+    "babel-eslint": "^4.1.1",
+    "babel-loader": "^5.3.2",
+    "babel-runtime": "^5.8.20",
+    "css-loader": "^0.18.0",
+    "eslint": "^1.7.2",
+    "eslint-config-airbnb": "0.0.8",
+    "eslint-plugin-react": "^3.3.2",
+    "expect": "^1.12.1",
+    "isparta": "^3.0.3",
+    "mocha": "^2.2.5",
+    "react-hot-loader": "^1.2.8",
+    "rimraf": "^2.3.4",
+    "webpack": "^1.9.6",
+    "webpack-dev-server": "^1.8.2",
+    "react": "0.14.x",
+    "react-dom": "0.14.x",
+    "immutable": "3.7.x",
+    "lcars": "1.1.x"
+  },
+  "npmName": "welp",
+  "npmFileMap": [
+    {
+      "basePath": "/dist/",
+      "files": [
+        "*.js"
+      ]
+    }
+  ],
+  "peerDependencies": {
+    "react": "0.14.x",
+    "react-dom": "0.14.x",
+    "immutable": "3.7.x",
+    "lcars": "1.1.x"
+  },
+  "dependencies": {
+    "events": "^1.1.0"
+  }
+}
