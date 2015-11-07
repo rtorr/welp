@@ -12,10 +12,7 @@
     "build:umd:min": "webpack src/index.js dist/welp.min.js --config webpack.config.production.js",
     "build:examples": "babel-node examples/buildAll.js",
     "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
-    "preversion": "npm run clean && npm run check",
-    "version": "npm run build",
-    "postversion": "git push && git push --tags && npm run clean",
-    "prepublish": "npm run clean && npm run build"
+    "version": "npm run build"
   },
   "repository": {
     "type": "git",

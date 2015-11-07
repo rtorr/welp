@@ -13,7 +13,7 @@ npm install --save welp react react-dom immutable lcars
 
 ## Docs
 
-### `ImmutableStore (object: {key: value}, callback_function: action)`
+#### `ImmutableStore (object: {key: value}, callback_function: action)`
 
 `ImmutableStore` takes two arguments. First is a javascript object that will be turned into an 
 [Immutable Map](http://facebook.github.io/immutable-js/docs/#/Map). 
@@ -34,7 +34,7 @@ const HelloStore = new ImmutableStore(
 );
 ```
 
-### `StoreComponent`
+#### `StoreComponent`
 
 StoreComponent is a base class for a React component that will implement Welp's Immutable store.
 I think by reading the small source, you can kind of see what it is up to. 
