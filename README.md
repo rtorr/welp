@@ -79,5 +79,5 @@ npm build
  
 npm start
  
-open ./examples/index.html 
+open http://localhost:8181/examples/index.html
 ```

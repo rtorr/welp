@@ -6,14 +6,13 @@
   "jsnext:main": "src/index.js",
   "scripts": {
     "start": "NODE_ENV=DEV node ./webpack.demo.server.js",
-    "clean": "rimraf lib dist coverage",
     "build:lib": "babel src --out-dir lib",
     "build:umd": "webpack src/index.js dist/welp.js --config webpack.config.development.js",
     "build:umd:min": "webpack src/index.js dist/welp.min.js --config webpack.config.production.js",
     "build:examples": "babel-node examples/buildAll.js",
     "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
     "version": "npm run build",
-    "postversion": "git push && git push --tags && npm run clean"
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
