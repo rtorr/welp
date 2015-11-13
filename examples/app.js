@@ -5,7 +5,7 @@ import LCARS from 'lcars';
 import {StoreComponent, ImmutableStore} from './../lib'
 const UPDATE_NUMBER = 'UPDATE_NUMBER';
 
-function updae_number(value) {
+function update_number(value) {
   LCARS.dispatch({
     type: UPDATE_NUMBER,
     data: value
@@ -31,7 +31,7 @@ class App extends StoreComponent {
     this.handleUpdateNumberChange = this.handleUpdateNumberChange.bind(this);
   }
   handleUpdateNumberChange() {
-    return updae_number(this.state.hello.count+=1);
+    return update_number(this.state.hello.count+=1);
   }
   render() {
     return (
