@@ -1,4 +1,4 @@
-# Welp
+# Welp ![Build status](https://circleci.com/gh/rtorr/welp.svg?style=shield&circle-token=:2d24fea4f59a17f8760f93ffe38598ac3ed162e6)
 
 A small base component and base store for immutable flux
 

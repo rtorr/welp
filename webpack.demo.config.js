@@ -32,10 +32,10 @@ module.exports = {
   entry: entry,
 
   output: {
-    library: 'Portal',
+    library: 'Welp',
     libraryTarget: 'umd',
     path: path.join(__dirname, 'dist'),
-    filename: 'Portal.js',
+    filename: 'Welp.js',
     publicPath: 'http://localhost:8181/dist'
   },
 

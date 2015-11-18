@@ -7,7 +7,7 @@ module.exports = {
     ]
   },
   output: {
-    library: 'Redux-Portal',
+    library: 'welp',
     libraryTarget: 'umd'
   },
   resolve: {
