@@ -60,7 +60,7 @@ class ImmutableStore extends EventEmitter {
     if (store_data === null || typeof store_data !== 'object') {
       throw new Error('Base Store: The first parameter typeof object and not null');
     }
-    this._data = Immutable.Map(store_data);
+    this._data = Immutable.fromJS(store_data);
     this.dispatchToken = LCARS.register((action) => {
       callback(action);
     });
