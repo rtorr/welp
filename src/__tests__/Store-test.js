@@ -45,7 +45,7 @@ describe('ImmutableStore', () => {
         {test: 'test'},
         action => action
       );
-      s.set('test', 'bob')
+      s.set('test', 'bob');
       expect('bob').toEqual(s.get('test'));
     });
     it('get', () => {
@@ -64,9 +64,9 @@ describe('ImmutableStore', () => {
     });
     it('updateIn', () => {
       const s = new ImmutableStore(
-        {test: Immutable.Map({
+        {test: {
           wat: 'wat'
-        })},
+        }},
         action => action
       );
       s.updateIn(['test', 'wat'], _ => 'wot');

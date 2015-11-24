@@ -57,8 +57,8 @@ class StoreComponent extends Component {
 class ImmutableStore extends EventEmitter {
   constructor(store_data, callback) {
     super();
-    if (store_data === null || typeof store_data !== 'object') {
-      throw new Error('Base Store: The first parameter typeof object and not null');
+    if (Object.prototype.toString.call(store_data) !== '[object Object]') {
+      throw new Error('Base Store: The first parameter must be an object');
     }
     this._data = Immutable.fromJS(store_data);
     this.dispatchToken = LCARS.register((action) => {
