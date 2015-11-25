@@ -31,7 +31,6 @@ class App extends StoreComponent {
     this.handleUpdateNumberChange = this.handleUpdateNumberChange.bind(this);
   }
   handleUpdateNumberChange() {
-    console.log(this.state)
     return update_number(this.state.hello.count + 1);
   }
   render() {

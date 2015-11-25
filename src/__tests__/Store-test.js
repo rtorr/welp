@@ -5,14 +5,41 @@ import Immutable from 'immutable';
 
 describe('ImmutableStore', () => {
 
+  const factory = (type) => {
+    try {
+      return new ImmutableStore(type, action => action);  
+    } catch (error) {
+      return error;
+    }
+    return 'goodtogo';
+  };
+
+  describe('Validate initial data', () => {
+
+    it('cannot be anything but an object or array', () => {
+      expect(factory(12).message).toBe('Base Store: The first argument must be an object or array');
+      expect(factory('12').message).toBe('Base Store: The first argument must be an object or array');
+      expect(factory(undefined).message).toBe('Base Store: The first argument must be an object or array');
+      expect(factory(null).message).toBe('Base Store: The first argument must be an object or array');
+      expect(factory(x=>x).message).toBe('Base Store: The first argument must be an object or array');
+      expect(factory().message).toBe('Base Store: The first argument must be an object or array');
+    });
+
+    it('must be an Object or Array', () => {
+      expect( factory({}) instanceof ImmutableStore ).toBe(true);
+      expect( factory([]) instanceof ImmutableStore ).toBe(true);
+    });
+    
+  });
+
   describe('Create a new ImmutableStore', () => {
     it('data passed to a new store is immutable', () => {
       const s = new ImmutableStore(
         {test: 'test'},
         action => action
       );
-      let test_data = s.get('test');
-      let new_test_data = s.set('test', 'new_test_data');
+      const test_data = s.get('test');
+      s.set('test', 'new_test_data');
       expect(test_data).toEqual('test');
       expect(test_data).toNotEqual(s.get('test'));
     });
@@ -27,7 +54,7 @@ describe('ImmutableStore', () => {
         action => {
           switch (action.type) {
             case TEST_TWO:
-            return s.set('test', action.data);
+              return s.set('test', action.data);
           }
         }
       );
