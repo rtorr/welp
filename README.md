@@ -28,7 +28,7 @@ const HelloStore = new ImmutableStore(
   action => {
     switch (action.type) {
       case UPDATE_NUMBER:
-        return HelloStore.updateIn(['count'], _ => action.data);
+        return HelloStore.updateIn(['hello', 'count'], _ => action.data);
     }
   }
 );
@@ -52,7 +52,7 @@ class App extends StoreComponent {
     this.handleUpdateNumberChange = this.handleUpdateNumberChange.bind(this);
   }
   handleUpdateNumberChange() {
-    return update_number(this.state.hello.count+=1);
+    return update_number(this.state.hello.count+1);
   }
   render() {
     return (
