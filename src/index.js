@@ -59,11 +59,11 @@ class WelpStore extends EventEmitter {
     super()
     if (process.env.NODE_ENV !== 'production') {
       const store_data_type = Object.prototype.toString.call(store_data);
-      if (store_data_type !== '[object Object]' && store_data_type !== '[object Array]') {
-        throw new Error('Base Store: The first argument must be an object or array');
+      if (store_data_type !== '[object Object]') {
+        throw new Error('Base Store: The first argument must be type object');
       }
       if (typeof callback !== 'function') {
-        throw new Error('Base Store: The second argument must be a function');
+        throw new Error('Base Store: The second argument must be type function');
       }
     }
     this._data = Immutable.fromJS(store_data);
@@ -106,6 +106,33 @@ class WelpStore extends EventEmitter {
   }
   removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
+  }
+  delete(key) {
+    const current = this._data;
+    const next = this._data.delete(key);
+    if (current !== next) {
+      this._data = next;
+      this.emit(CHANGE_EVENT);
+    }
+    return this._data;
+  }
+  clear() {
+    const current = this._data;
+    const next = this._data.clear();
+    if (current !== next) {
+      this._data = next;
+      this.emit(CHANGE_EVENT);
+    }
+    return this._data;
+  }
+  merge(...maps){
+    const current = this._data;
+    const next = this._data.merge(...maps);
+    if (current !== next) {
+      this._data = next;
+      this.emit(CHANGE_EVENT);
+    }
+    return this._data;
   }
 }
 

@@ -17,17 +17,17 @@ describe('WelpStore', () => {
   describe('Validate initial data', () => {
 
     it('cannot be anything but an object or array', () => {
-      expect(factory(12).message).toBe('Base Store: The first argument must be an object or array');
-      expect(factory('12').message).toBe('Base Store: The first argument must be an object or array');
-      expect(factory(undefined).message).toBe('Base Store: The first argument must be an object or array');
-      expect(factory(null).message).toBe('Base Store: The first argument must be an object or array');
-      expect(factory(x=>x).message).toBe('Base Store: The first argument must be an object or array');
-      expect(factory().message).toBe('Base Store: The first argument must be an object or array');
+      expect(factory(12).message).toBe('Base Store: The first argument must be type object');
+      expect(factory('12').message).toBe('Base Store: The first argument must be type object');
+      expect(factory(undefined).message).toBe('Base Store: The first argument must be type object');
+      expect(factory(null).message).toBe('Base Store: The first argument must be type object');
+      expect(factory([]).message).toBe('Base Store: The first argument must be type object');
+      expect(factory(x=>x).message).toBe('Base Store: The first argument must be type object');
+      expect(factory().message).toBe('Base Store: The first argument must be type object');
     });
 
     it('must be an Object or Array', () => {
       expect( factory({}) instanceof WelpStore ).toBe(true);
-      expect( factory([]) instanceof WelpStore ).toBe(true);
     });
 
   });
@@ -44,7 +44,6 @@ describe('WelpStore', () => {
       expect(test_data).toNotEqual(s.get('test'));
     });
   });
-
 
   describe('Update data from dispatched actions', () => {
     it('set', () => {
@@ -106,6 +105,26 @@ describe('WelpStore', () => {
       );
       expect(Immutable.Map({test: 'test'})).toEqual(s.getDataStructure());
     });
+    it('delete', () => {
+      const s = new WelpStore(
+        {test: 'test'},
+        action => action
+      );
+      expect(s.delete('test').toJS()).toEqual({});
+    });
+    it('clear', () => {
+      const s = new WelpStore(
+        {test: 'test'},
+        action => action
+      );
+      expect(s.clear().toJS()).toEqual({});
+    });
+    it('merge', () => {
+      const s = new WelpStore(
+        {test: 'test'},
+        action => action
+      );
+      expect(s.merge(Immutable.Map({wat: 'wat'})).toJS()).toEqual({ test: 'test', wat: 'wat' });
+    });
   });
-
 });
