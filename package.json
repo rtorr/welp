@@ -1,6 +1,6 @@
 {
   "name": "welp",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A small base component and base store for immutable flux",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
