@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Immutable from 'immutable';
 import LCARS from 'lcars';
-import {StoreComponent, ImmutableStore} from './../lib'
+import {StoreComponent, ImmutableStore} from './../lib';
 const UPDATE_NUMBER = 'UPDATE_NUMBER';
 
 function update_number(value) {
@@ -19,19 +19,19 @@ const HelloStore = new ImmutableStore(
   action => {
     switch (action.type) {
       case UPDATE_NUMBER:
-        return HelloStore.updateIn(['count'], _ => action.data);
+        return HelloStore.updateIn(['hello', 'count'], _ => action.data);
     }
   }
 );
 
 
 class App extends StoreComponent {
-  constructor(props){
-    super(props, [HelloStore])
+  constructor(props) {
+    super(props, [HelloStore]);
     this.handleUpdateNumberChange = this.handleUpdateNumberChange.bind(this);
   }
   handleUpdateNumberChange() {
-    return update_number(this.state.hello.count+=1);
+    return update_number(this.state.hello.count + 1);
   }
   render() {
     return (
