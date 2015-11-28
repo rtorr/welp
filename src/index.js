@@ -4,7 +4,6 @@ import {EventEmitter} from 'events';
 import {Component} from 'react';
 const CHANGE_EVENT = 'change';
 
-
 class WelpComponent extends Component {
 
   constructor(props, stores) {
@@ -71,6 +70,13 @@ class WelpStore extends EventEmitter {
       callback(action);
     });
   }
+  _check_data = (current, next) => {
+    if (current !== next) {
+      this._data = next;
+      this.emit(CHANGE_EVENT);
+    }
+    return this._data;
+  }
   get(key) {
     return this._data.get(key);
   }
@@ -78,22 +84,10 @@ class WelpStore extends EventEmitter {
     return this._data.toJS();
   }
   set(key, value) {
-    const current = this._data;
-    const next = this._data.set(key, value);
-    if (current !== next) {
-      this._data = next;
-      this.emit(CHANGE_EVENT);
-    }
-    return this._data;
+    return this._check_data(this._data, this._data.set(key, value));
   }
   updateIn(key_path, value) {
-    const current = this._data;
-    const next = this._data.updateIn(key_path, value);
-    if (current !== next) {
-      this._data = next;
-      this.emit(CHANGE_EVENT);
-    }
-    return this._data;
+    return this._check_data(this._data, this._data.updateIn(key_path, value));
   }
   getDataStructure() {
     return this._data;
@@ -108,31 +102,13 @@ class WelpStore extends EventEmitter {
     this.removeListener(CHANGE_EVENT, callback);
   }
   delete(key) {
-    const current = this._data;
-    const next = this._data.delete(key);
-    if (current !== next) {
-      this._data = next;
-      this.emit(CHANGE_EVENT);
-    }
-    return this._data;
+    return this._check_data(this._data, this._data.delete(key));
   }
   clear() {
-    const current = this._data;
-    const next = this._data.clear();
-    if (current !== next) {
-      this._data = next;
-      this.emit(CHANGE_EVENT);
-    }
-    return this._data;
+    return this._check_data(this._data, this._data.clear());
   }
   merge(...maps){
-    const current = this._data;
-    const next = this._data.merge(...maps);
-    if (current !== next) {
-      this._data = next;
-      this.emit(CHANGE_EVENT);
-    }
-    return this._data;
+    return this._check_data(this._data, this._data.merge(...maps));
   }
 }
 
