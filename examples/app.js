@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Immutable from 'immutable';
 import LCARS from 'lcars';
-import {StoreComponent, ImmutableStore} from './../lib';
+import {WelpComponent, WelpStore} from './../lib';
 const UPDATE_NUMBER = 'UPDATE_NUMBER';
 
 function update_number(value) {
@@ -12,7 +12,7 @@ function update_number(value) {
   });
 }
 
-const HelloStore = new ImmutableStore(
+const HelloStore = new WelpStore(
   {hello: {
     count: 0
   }},
@@ -24,8 +24,7 @@ const HelloStore = new ImmutableStore(
   }
 );
 
-
-class App extends StoreComponent {
+class App extends WelpComponent {
   constructor(props) {
     super(props, [HelloStore]);
     this.handleUpdateNumberChange = this.handleUpdateNumberChange.bind(this);

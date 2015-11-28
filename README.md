@@ -13,15 +13,15 @@ npm install --save welp react react-dom immutable lcars
 
 ## Docs
 
-***`ImmutableStore (object: {key: value}, callback_function: action)`***
+***`WelpStore (object: {key: value}, callback_function: action)`***
 
-`ImmutableStore` takes two arguments. First is a javascript object that will be turned into an 
+`WelpStore` takes two arguments. First is a javascript object that will be turned into an 
 [Immutable Map](http://facebook.github.io/immutable-js/docs/#/Map). 
 
-`ImmutableStore's` second argument is a callback function that has dispatched action objects passed to it
+`WelpStore's` second argument is a callback function that has dispatched action objects passed to it
 
 ```
-const HelloStore = new ImmutableStore(
+const HelloStore = new WelpStore(
   {hello: {
     count: 0
   }},
@@ -34,19 +34,19 @@ const HelloStore = new ImmutableStore(
 );
 ```
 
-***`StoreComponent`***
+***`WelpComponent`***
 
-StoreComponent is a base class for a React component that will implement Welp's Immutable store.
+WelpComponent is a base class for a React component that will implement Welp's Immutable store.
 I think by reading the small source, you can kind of see what it is up to. 
 
 pass `props` and and an array of `[stores]` to super.
 
-`StoreComponent` will bind to all of the stores passed in that array. When data changes in the stores,
-`StoreComponent` will make a comparison of the previous state and previous props to see if there were changes,
-if so, we will re-render (look at `shouldComponentUpdate` in `StoreComponent`).
+`WelpComponent` will bind to all of the stores passed in that array. When data changes in the stores,
+`WelpComponent` will make a comparison of the previous state and previous props to see if there were changes,
+if so, we will re-render (look at `shouldComponentUpdate` in `WelpComponent`).
 
 ```
-class App extends StoreComponent {
+class App extends WelpComponent {
   constructor(props){
     super(props, [HelloStore])
     this.handleUpdateNumberChange = this.handleUpdateNumberChange.bind(this);
@@ -73,11 +73,7 @@ git clone git@github.com:rtorr/welp.git
 
 cd welp
 
-npm install
-
-npm run build
- 
-npm start
+npm run examples
  
 open http://localhost:8181/examples/index.html
 ```

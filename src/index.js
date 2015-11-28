@@ -5,7 +5,7 @@ import {Component} from 'react';
 const CHANGE_EVENT = 'change';
 
 
-class StoreComponent extends Component {
+class WelpComponent extends Component {
 
   constructor(props, stores) {
     super(props);
@@ -54,7 +54,7 @@ class StoreComponent extends Component {
 
 }
 
-class ImmutableStore extends EventEmitter {
+class WelpStore extends EventEmitter {
   constructor(store_data, callback) {
     super()
     if (process.env.NODE_ENV !== 'production') {
@@ -110,6 +110,6 @@ class ImmutableStore extends EventEmitter {
 }
 
 export {
-  StoreComponent,
-  ImmutableStore
+  WelpComponent,
+  WelpStore
 };

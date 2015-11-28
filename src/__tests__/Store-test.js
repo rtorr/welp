@@ -1,13 +1,13 @@
 import LCARS from 'lcars';
 import expect from 'expect';
-import {ImmutableStore} from './../';
+import {WelpStore} from './../';
 import Immutable from 'immutable';
 
-describe('ImmutableStore', () => {
+describe('WelpStore', () => {
 
   const factory = (type) => {
     try {
-      return new ImmutableStore(type, action => action);  
+      return new WelpStore(type, action => action);
     } catch (error) {
       return error;
     }
@@ -26,15 +26,15 @@ describe('ImmutableStore', () => {
     });
 
     it('must be an Object or Array', () => {
-      expect( factory({}) instanceof ImmutableStore ).toBe(true);
-      expect( factory([]) instanceof ImmutableStore ).toBe(true);
+      expect( factory({}) instanceof WelpStore ).toBe(true);
+      expect( factory([]) instanceof WelpStore ).toBe(true);
     });
-    
+
   });
 
-  describe('Create a new ImmutableStore', () => {
+  describe('Create a new WelpStore', () => {
     it('data passed to a new store is immutable', () => {
-      const s = new ImmutableStore(
+      const s = new WelpStore(
         {test: 'test'},
         action => action
       );
@@ -49,7 +49,7 @@ describe('ImmutableStore', () => {
   describe('Update data from dispatched actions', () => {
     it('set', () => {
       const TEST_TWO = 'TEST_TWO';
-      const s = new ImmutableStore(
+      const s = new WelpStore(
         {test: 'test'},
         action => {
           switch (action.type) {
@@ -68,7 +68,7 @@ describe('ImmutableStore', () => {
 
   describe('Store methods', () => {
     it('set', () => {
-      const s = new ImmutableStore(
+      const s = new WelpStore(
         {test: 'test'},
         action => action
       );
@@ -76,21 +76,21 @@ describe('ImmutableStore', () => {
       expect('bob').toEqual(s.get('test'));
     });
     it('get', () => {
-      const s = new ImmutableStore(
+      const s = new WelpStore(
         {test: 'test'},
         action => action
       );
       expect(s.get('test')).toEqual('test');
     });
     it('getStateData - returns javascript (for react state)', () => {
-      const s = new ImmutableStore(
+      const s = new WelpStore(
         {test: 'test'},
         action => action
       );
       expect(s.getStateData()).toEqual({test: 'test'});
     });
     it('updateIn', () => {
-      const s = new ImmutableStore(
+      const s = new WelpStore(
         {test: {
           wat: 'wat'
         }},
@@ -100,7 +100,7 @@ describe('ImmutableStore', () => {
       expect('wot').toEqual(s.get('test').toJS().wat);
     });
     it('getDataStructure - returns an immutable js map of our data', () => {
-      const s = new ImmutableStore(
+      const s = new WelpStore(
         {test: 'test'},
         action => action
       );
