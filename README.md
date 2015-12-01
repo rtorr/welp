@@ -1,4 +1,4 @@
-# Welp ![Build status](https://circleci.com/gh/rtorr/welp.svg?style=shield&circle-token=:2d24fea4f59a17f8760f93ffe38598ac3ed162e6)
+# Welp ![Build status](https://circleci.com/gh/rtorr/welp.svg?style=shield&circle-token=:2d24fea4f59a17f8760f93ffe38598ac3ed162e6) [![Coverage Status](https://coveralls.io/repos/rtorr/welp/badge.svg?branch=master&service=github)](https://coveralls.io/github/rtorr/welp?branch=master)
 
 A small base component and base store for immutable flux
 
