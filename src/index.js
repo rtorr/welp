@@ -70,7 +70,7 @@ class WelpStore extends EventEmitter {
       callback(action);
     });
   }
-  _check_data (current, next) {
+  _check_data(current, next) {
     if (current !== next) {
       this._data = next;
       this.emit(CHANGE_EVENT);
