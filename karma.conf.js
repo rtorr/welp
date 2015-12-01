@@ -8,12 +8,9 @@ var src_path = process.env.NODE_ENV === 'production' ? 'dist' : 'src';
 var coverageLoaders = [];
 var coverageReporters = [];
 
-console.log(path.resolve(__dirname, './src/'))
-
 coverageLoaders.push({
   test: /\.js$/,
-  include: path.resolve(__dirname, './src/'),
-  exclude: /__tests__/,
+  exclude: [/node_modules/, /__tests__/, /tests.webpack.js/],
   loader: 'isparta'
 });
 
