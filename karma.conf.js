@@ -10,7 +10,7 @@ var coverageReporters = [];
 
 coverageLoaders.push({
   test: /\.js$/,
-  include: path.resolve('src/'),
+  include: path.resolve(__dirname, './src/'),
   exclude: /__tests__/,
   loader: 'isparta'
 });
