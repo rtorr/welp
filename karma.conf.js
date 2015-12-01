@@ -10,6 +10,7 @@ var coverageReporters = [];
 
 coverageLoaders.push({
   test: /\.js$/,
+  exclude: [/node_modules/, /__tests__/, /tests.webpack.js/],
   loader: 'isparta'
 });
 
