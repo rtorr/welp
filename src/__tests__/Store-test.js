@@ -11,7 +11,6 @@ describe('WelpStore', () => {
     } catch (error) {
       return error;
     }
-    return 'goodtogo';
   };
 
   describe('Validate initial data', () => {
