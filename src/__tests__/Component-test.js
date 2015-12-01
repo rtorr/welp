@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import LCARS from 'lcars';
 import expect from 'expect';
-import {WelpComponent, WelpStore} from './../';
+import {WelpComponent, WelpStore} from '../index';
 import Immutable from 'immutable';
 import ReactTestUtils from 'react-addons-test-utils';
 

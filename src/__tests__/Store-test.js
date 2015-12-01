@@ -1,6 +1,6 @@
 import LCARS from 'lcars';
 import expect from 'expect';
-import {WelpStore} from './../';
+import {WelpStore} from './../index';
 import Immutable from 'immutable';
 
 describe('WelpStore', () => {
