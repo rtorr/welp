@@ -5,13 +5,25 @@ var resolvPath = function(componentPath) {
 };
 var src_path = process.env.NODE_ENV === 'production' ? 'dist' : 'src';
 
+var coverageLoaders = [];
+var coverageReporters = [];
+
+coverageLoaders.push({
+  test: /\.js$/,
+  include: path.resolve('src/'),
+  exclude: /__tests__/,
+  loader: 'isparta'
+});
+
+coverageReporters.push('coverage');
+
 module.exports = function(config) {
 
   config.set({
 
     browsers: [ 'PhantomJS' ],
     frameworks: [ 'mocha' ],
-    reporters: [ 'mocha', 'coverage', 'coveralls' ],
+    reporters: [ 'mocha' ].concat(coverageReporters),
 
     files: [
       'node_modules/es5-shim/es5-shim.js',
@@ -20,8 +32,10 @@ module.exports = function(config) {
     ],
 
     coverageReporter: {
-      type: 'lcov', // lcov or lcovonly are required for generating lcov.info files
-      dir: 'coverage/'
+      reporters: [
+        { type: 'html', subdir: 'html' },
+        { type: 'lcovonly', subdir: '.' }
+      ]
     },
 
     preprocessors: {
@@ -33,7 +47,7 @@ module.exports = function(config) {
       module: {
         loaders: [
           { test: /\.js$/, exclude: /node_modules/, loader: 'babel' }
-        ]
+        ].concat(coverageLoaders)
       },
       plugins: [
         new webpack.DefinePlugin({
