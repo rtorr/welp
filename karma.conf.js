@@ -8,14 +8,6 @@ var src_path = process.env.NODE_ENV === 'production' ? 'dist' : 'src';
 var coverageLoaders = [];
 var coverageReporters = [];
 
-coverageLoaders.push({
-  test: /\.js$/,
-  include: path.resolve('src/'),
-  exclude: /__tests__/,
-  loader: 'isparta'
-});
-
-coverageReporters.push('coverage');
 
 module.exports = function(config) {
 
@@ -23,7 +15,7 @@ module.exports = function(config) {
 
     browsers: [ 'PhantomJS' ],
     frameworks: [ 'mocha' ],
-    reporters: [ 'mocha' ].concat(coverageReporters),
+    reporters: [ 'mocha', 'coverage'],
 
     files: [
       'node_modules/es5-shim/es5-shim.js',
@@ -46,8 +38,14 @@ module.exports = function(config) {
       devtool: 'inline-source-map',
       module: {
         loaders: [
-          { test: /\.js$/, exclude: /node_modules/, loader: 'babel' }
-        ].concat(coverageLoaders)
+          { test: /\.js$/, exclude: /node_modules/, loader: 'babel' },
+          {
+            test: /\.js$/,
+            include: path.resolve('src/'),
+            exclude: /(node_modules | __tests__)/,
+            loader: 'isparta'
+          }
+        ]
       },
       plugins: [
         new webpack.DefinePlugin({

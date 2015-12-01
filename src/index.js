@@ -55,7 +55,7 @@ class WelpComponent extends Component {
 
 class WelpStore extends EventEmitter {
   constructor(store_data, callback) {
-    super()
+    super();
     if (process.env.NODE_ENV !== 'production') {
       const store_data_type = Object.prototype.toString.call(store_data);
       if (store_data_type !== '[object Object]') {
@@ -70,7 +70,7 @@ class WelpStore extends EventEmitter {
       callback(action);
     });
   }
-  _check_data = (current, next) => {
+  _check_data (current, next) {
     if (current !== next) {
       this._data = next;
       this.emit(CHANGE_EVENT);
