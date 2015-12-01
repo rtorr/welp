@@ -42,7 +42,7 @@ module.exports = function(config) {
           {
             test: /\.js$/,
             include: path.resolve('src/'),
-            exclude: /(node_modules | __tests__)/,
+            exclude: /__tests__/,
             loader: 'isparta'
           }
         ]
