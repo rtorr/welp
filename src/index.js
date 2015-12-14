@@ -16,6 +16,9 @@ class WelpComponent extends Component {
 
   componentDidMount() {
     this.mounted = true;
+  }
+
+  componentWillMount() {
     if (!this.stores) {
       throw new Error('You must have a stores array property');
     }
