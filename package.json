@@ -1,6 +1,6 @@
 {
   "name": "welp",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "small and simple immutable flux",
   "main": "lib/Welp.js",
   "jsnext:main": "src/Welp.js",
