@@ -7,7 +7,7 @@ small and simple immutable flux
 To install the stable version:
 
 ```
-npm install --save welp react react-dom immutable lcars
+npm install --save welp
 ```
 
 
