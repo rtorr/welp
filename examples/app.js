@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {WelpComponent, WelpStore, WelpDispatcher} from './../lib';
+import {WelpComponent, WelpStore, WelpDispatcher} from './../lib/Welp';
 const UPDATE_NUMBER = 'UPDATE_NUMBER';
 
 function update_number(value) {

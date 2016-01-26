@@ -9,7 +9,7 @@ var plugins = [
 var entry = ['./examples/app'];
 var loaders = [];
 
-if(process.env.NODE_ENV === 'PRODUCTION'){
+if(process.env.NODE_ENV === 'PRODUCTION') {
   loaders.push(
     {test: /\.js?$/, exclude: /node_modules/, loaders: ['babel']}
   );
