@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Immutable from 'immutable';
-import LCARS from 'lcars';
-import {WelpComponent, WelpStore} from './../lib';
+
+import {WelpComponent, WelpStore, WelpDispatcher} from './../lib';
 const UPDATE_NUMBER = 'UPDATE_NUMBER';
 
 function update_number(value) {
-  LCARS.dispatch({
+  WelpDispatcher.dispatch({
     type: UPDATE_NUMBER,
     data: value
   });
@@ -19,7 +18,7 @@ const HelloStore = new WelpStore(
   action => {
     switch (action.type) {
       case UPDATE_NUMBER:
-        return HelloStore.updateIn(['hello', 'count'], _ => action.data);
+        return HelloStore.replace(HelloStore.data().updateIn(['hello', 'count'], _ => action.data));
     }
   }
 );

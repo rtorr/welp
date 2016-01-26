@@ -1,6 +1,6 @@
-import LCARS from 'lcars';
+import WelpDispatcher from './../Dispatcher';
 import expect from 'expect';
-import {WelpStore} from './../index';
+import WelpStore from './../Store';
 import Immutable from 'immutable';
 
 describe('WelpStore', () => {
@@ -15,16 +15,6 @@ describe('WelpStore', () => {
 
   describe('Validate initial data', () => {
 
-    it('cannot be anything but an object or array', () => {
-      expect(factory(12).message).toBe('Base Store: The first argument must be type object');
-      expect(factory('12').message).toBe('Base Store: The first argument must be type object');
-      expect(factory(undefined).message).toBe('Base Store: The first argument must be type object');
-      expect(factory(null).message).toBe('Base Store: The first argument must be type object');
-      expect(factory([]).message).toBe('Base Store: The first argument must be type object');
-      expect(factory(x=>x).message).toBe('Base Store: The first argument must be type object');
-      expect(factory().message).toBe('Base Store: The first argument must be type object');
-    });
-
     it('must be an Object or Array', () => {
       expect( factory({}) instanceof WelpStore ).toBe(true);
     });
@@ -38,7 +28,7 @@ describe('WelpStore', () => {
         action => action
       );
       const test_data = s.get('test');
-      s.set('test', 'new_test_data');
+      s.replace(s.data().set('test', 'new_test_data'));
       expect(test_data).toEqual('test');
       expect(test_data).toNotEqual(s.get('test'));
     });
@@ -52,11 +42,11 @@ describe('WelpStore', () => {
         action => {
           switch (action.type) {
             case TEST_TWO:
-              return s.set('test', action.data);
+              return s.replace(s.data().set('test', action.data));
           }
         }
       );
-      LCARS.dispatch({
+      WelpDispatcher.dispatch({
         type: TEST_TWO,
         data: 'http://www.rtorr.com/'
       });
@@ -64,13 +54,13 @@ describe('WelpStore', () => {
     });
   });
 
-  describe('Store methods', () => {
+  describe('Store method examples', () => {
     it('set', () => {
       const s = new WelpStore(
         {test: 'test'},
         action => action
       );
-      s.set('test', 'bob');
+      s.replace(s.data().set('test', 'bob'));
       expect('bob').toEqual(s.get('test'));
     });
     it('get', () => {
@@ -94,7 +84,7 @@ describe('WelpStore', () => {
         }},
         action => action
       );
-      s.updateIn(['test', 'wat'], _ => 'wot');
+      s.replace(s.data().updateIn(['test', 'wat'], _ => 'wot'));
       expect('wot').toEqual(s.get('test').toJS().wat);
     });
     it('getDataStructure - returns an immutable js map of our data', () => {
@@ -109,21 +99,21 @@ describe('WelpStore', () => {
         {test: 'test'},
         action => action
       );
-      expect(s.delete('test').toJS()).toEqual({});
+      expect(s.replace(s.data().delete('test')).toJS()).toEqual({});
     });
     it('clear', () => {
       const s = new WelpStore(
         {test: 'test'},
         action => action
       );
-      expect(s.clear().toJS()).toEqual({});
+      expect(s.replace(s.data().clear()).toJS()).toEqual({});
     });
     it('merge', () => {
       const s = new WelpStore(
         {test: 'test'},
         action => action
       );
-      expect(s.merge(Immutable.Map({wat: 'wat'})).toJS()).toEqual({ test: 'test', wat: 'wat' });
+      expect(s.replace(s.data().merge(Immutable.Map({wat: 'wat'}))).toJS()).toEqual({ test: 'test', wat: 'wat' });
     });
   });
 });

@@ -1,15 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import LCARS from 'lcars';
+import WelpDispatcher from './../Dispatcher';
 import expect from 'expect';
-import {WelpComponent, WelpStore} from '../index';
-import Immutable from 'immutable';
+import WelpComponent from '../Component';
+import WelpStore from '../Store';
 import ReactTestUtils from 'react-addons-test-utils';
 
 const UPDATE_NUMBER = 'UPDATE_NUMBER';
 
 function update_number(value) {
-  LCARS.dispatch({
+  WelpDispatcher.dispatch({
     type: UPDATE_NUMBER,
     data: value
   });
@@ -22,7 +21,7 @@ const Store = new WelpStore(
   action => {
     switch (action.type) {
       case UPDATE_NUMBER:
-        return Store.updateIn(['hello', 'count'], _ => action.data);
+        return Store.replace(Store.data().updateIn(['hello', 'count'], _ => action.data));
     }
   }
 );

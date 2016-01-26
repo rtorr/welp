@@ -1,13 +1,13 @@
 {
   "name": "welp",
   "version": "4.0.0",
-  "description": "A small base component and base store for immutable flux",
-  "main": "lib/index.js",
-  "jsnext:main": "src/index.js",
+  "description": "small and simple immutable flux",
+  "main": "lib/Welp.js",
+  "jsnext:main": "src/Welp.js",
   "scripts": {
     "build:lib": "babel src --out-dir lib",
-    "build:umd": "webpack src/index.js dist/welp.js --config webpack.config.development.js",
-    "build:umd:min": "webpack src/index.js dist/welp.min.js --config webpack.config.production.js",
+    "build:umd": "webpack src/Welp.js dist/welp.js --config webpack.config.development.js",
+    "build:umd:min": "webpack src/Welp.js dist/welp.min.js --config webpack.config.production.js",
     "build:examples": "babel-node examples/buildAll.js",
     "build": "npm run build:lib && npm run build:umd && npm run build:umd:min",
     "examples": "npm install && npm run build && npm start",
@@ -45,7 +45,6 @@
     "eslint-config-airbnb": "0.0.8",
     "eslint-plugin-react": "^3.3.2",
     "expect": "^1.13.0",
-    "immutable": "3.7.x",
     "isparta": "^3.0.3",
     "karma": "^0.13.8",
     "karma-browserstack-launcher": "^0.1.4",
@@ -60,9 +59,7 @@
     "lcars": "1.1.x",
     "mocha": "^2.2.5",
     "phantomjs": "^1.9.18",
-    "react": "0.14.x",
     "react-addons-test-utils": "^0.14.3",
-    "react-dom": "0.14.x",
     "react-hot-loader": "^1.2.8",
     "rimraf": "^2.3.4",
     "webpack": "^1.9.6",
@@ -77,14 +74,15 @@
       ]
     }
   ],
-  "peerDependencies": {
-    "react": "0.14.x",
-    "react-dom": "0.14.x",
-    "immutable": "3.7.x",
-    "lcars": "1.1.x"
-  },
   "dependencies": {
+    "es6-promise": "^3.0.2",
+    "eventemitter3": "^1.1.1",
     "events": "^1.1.0",
-    "isparta-loader": "^1.0.0"
+    "flux": "^2.1.1",
+    "immutable": "^3.7.6",
+    "isparta-loader": "^1.0.0",
+    "object-assign": "^4.0.1",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6"
   }
 }
