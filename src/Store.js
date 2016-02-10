@@ -10,6 +10,7 @@ class WelpStore extends EventEmitter {
   constructor(store_data, callback) {
     super();
     this._data = this.replace(store_data);
+    this.becameClean();
     this.dispatchToken = Dispatcher.register((action) => {
       callback(action);
     });
@@ -25,7 +26,7 @@ class WelpStore extends EventEmitter {
     if (Iterable.isIterable(data)) {
       return this._check_data(this._data, data);
     }
-    return this._check_data(this._data, fromJS(data)); 
+    return this._check_data(this._data, fromJS(data));
   }
   data() {
     return this._data;
@@ -47,6 +48,16 @@ class WelpStore extends EventEmitter {
   }
   removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
+  }
+  becameClean() {
+    this._clean_state = this.data();
+    return this.data();
+  }
+  isClean() {
+    return this._clean_state === this._data;
+  }
+  rollback() {
+    return this.replace(this._clean_state);
   }
 }
 
