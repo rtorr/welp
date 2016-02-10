@@ -115,14 +115,14 @@ describe('WelpStore', () => {
       );
       expect(s.replace(s.data().merge(Immutable.Map({wat: 'wat'}))).toJS()).toEqual({ test: 'test', wat: 'wat' });
     });
-    it('becameClean', () => {
+    it('replaceClean', () => {
       const s = new WelpStore(
         {test: 123},
         action => action
       );
       expect( s._clean_state.toJS() ).toEqual( {test: 123} );
-      s.replace(s.data().set('test', 'passed'));
-      s.becameClean();
+      s.replaceClean(s.data().set('test', 'passed'));
+      expect( s.data().toJS() ).toEqual( {test: 'passed'} );
       expect( s._clean_state.toJS() ).toEqual( {test: 'passed'} );
     });
     it('isClean', () => {
