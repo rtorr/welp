@@ -133,6 +133,8 @@ describe('WelpStore', () => {
       expect( s.isClean() ).toEqual( true );
       s.replace(s.data().set('test', 'passed'));
       expect( s.isClean() ).toEqual( false );
+      s.replaceClean({test: 321});
+      expect( s.isClean() ).toEqual( true );
     });
     it('rollback', () => {
       const s = new WelpStore(
@@ -144,6 +146,16 @@ describe('WelpStore', () => {
       expect( s.data().toJS() ).toEqual( {test: 'somethingelse'} );
       s.rollback();
       expect( s.data().toJS() ).toEqual( {test: 123} );
+    });
+    it('_ensure_immutibility', () => {
+      const s = new WelpStore(
+        {test: 123},
+        action => action
+      );
+      const immutable_object = Immutable.fromJS({test: 123});
+      const mutable_object = {test: 123};
+      expect( Immutable.Iterable.isIterable( s._ensure_immutibility(immutable_object) ) ).toEqual( true );
+      expect( Immutable.Iterable.isIterable( s._ensure_immutibility(mutable_object) ) ).toEqual( true );
     });
     
   });
