@@ -136,6 +136,17 @@ describe('WelpStore', () => {
       s.replaceClean({test: 321});
       expect( s.isClean() ).toEqual( true );
     });
+    it('isDirty', () => {
+      const s = new WelpStore(
+        {test: 123},
+        action => action
+      );
+      expect( s.isDirty() ).toEqual( false );
+      s.replace(s.data().set('test', 'passed'));
+      expect( s.isDirty() ).toEqual( true );
+      s.replaceClean({test: 321});
+      expect( s.isDirty() ).toEqual( false );
+    });
     it('rollback', () => {
       const s = new WelpStore(
         {test: 123},
