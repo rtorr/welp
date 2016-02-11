@@ -21,11 +21,11 @@ class WelpStore extends EventEmitter {
     }
     return this._data;
   }
+  _ensure_immutibility(data) {
+    return Iterable.isIterable(data) ? data : fromJS(data);
+  }
   replace(data) {
-    if (Iterable.isIterable(data)) {
-      return this._check_data(this._data, data);
-    }
-    return this._check_data(this._data, fromJS(data));
+    return this._check_data(this.data(), this._ensure_immutibility(data));
   }
   data() {
     return this._data;
@@ -49,11 +49,11 @@ class WelpStore extends EventEmitter {
     this.removeListener(CHANGE_EVENT, callback);
   }
   replaceClean(data) {
-    this._clean_state = this.replace(data);
-    return this.data();
+    this._clean_state = this._ensure_immutibility(data);
+    return this._check_data(this.data(), this._clean_state);
   }
   isClean() {
-    return this._clean_state === this._data;
+    return JSON.stringify(this._clean_state) === JSON.stringify(this._data);
   }
   rollback() {
     return this.replace(this._clean_state);
