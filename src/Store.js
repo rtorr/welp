@@ -1,4 +1,4 @@
-import { fromJS, Iterable } from 'immutable';
+import { fromJS, Iterable, is } from 'immutable';
 import EventEmitter from 'eventemitter3';
 
 import Dispatcher from './Dispatcher';
@@ -15,7 +15,7 @@ class WelpStore extends EventEmitter {
     });
   }
   _check_data(current, next) {
-    if (current !== next) {
+    if (!is(current, next)) {
       this._data = next;
       this.emit(CHANGE_EVENT);
     }
@@ -53,10 +53,10 @@ class WelpStore extends EventEmitter {
     return this._check_data(this.data(), this._clean_state);
   }
   isDirty() {
-    return JSON.stringify(this._clean_state) !== JSON.stringify(this._data);
+    return !is(this._clean_state, this._data);
   }
   isClean() {
-    return !this.isDirty();
+    return is(this._clean_state, this._data);
   }
   rollback() {
     return this.replace(this._clean_state);
