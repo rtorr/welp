@@ -52,8 +52,11 @@ class WelpStore extends EventEmitter {
     this._clean_state = this._ensure_immutibility(data);
     return this._check_data(this.data(), this._clean_state);
   }
+  isDirty() {
+    return JSON.stringify(this._clean_state) !== JSON.stringify(this._data);
+  }
   isClean() {
-    return JSON.stringify(this._clean_state) === JSON.stringify(this._data);
+    return !this.isDirty();
   }
   rollback() {
     return this.replace(this._clean_state);
