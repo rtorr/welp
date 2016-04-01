@@ -77,5 +77,3 @@ npm run examples
  
 open http://localhost:8181/examples/index.html
 ```
-
-This is an example change
